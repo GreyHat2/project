@@ -2,6 +2,7 @@ import DB as d
 import encrypt1 as e
 
 
+
 def data():
     # d.createdb()
     name = input("Enter a name: ")
@@ -23,29 +24,32 @@ def main():
         print("""    ##Commmands##
     >Create a database(c)
     >Delete a row(d)
+    >Lock database(l)
+    >Unlock database(o)
     >Show data(s)
     >Add data(a)
     >Quit(q)
         """)
         main()
+    elif com == "l":
+        e.encrypt("data.db")
+    
+    elif com == "o":
+        ID = input("Enter database name: ") 
+        key = input("Enter the key: ")
+        e.decrypt(key, ID)
+
     elif com == "c":
         d.createdb()
-        e.encrypt("data.db")
         main()
     elif com == "d":
         id = input("Enter ID: ")
         d.delete(id)
         main()
-    elif com == "s":
-        ID = input("Enter database name: ") #Damn so many errors "cryptography.fernet.InvalidToken"
-        key = input("Enter the key: ")
-        e.decrypt(key, ID) 
+    elif com == "s": 
         d.fetchall()
-        main()
+        main() 
     elif com == "a":
-        ID = input("Enter database name: ") 
-        key = input("Enter the key: ")
-        e.decrypt(key, ID)
         data()
         main()
     elif com == "q":

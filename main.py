@@ -1,4 +1,5 @@
 import DB as d
+import encrypt1 as e
 
 
 def data():
@@ -29,15 +30,22 @@ def main():
         main()
     elif com == "c":
         d.createdb()
+        e.encrypt("data.db")
         main()
     elif com == "d":
         id = input("Enter ID: ")
         d.delete(id)
         main()
     elif com == "s":
+        ID = input("Enter database name: ") #Damn so many errors "cryptography.fernet.InvalidToken"
+        key = input("Enter the key: ")
+        e.decrypt(key, ID) 
         d.fetchall()
         main()
     elif com == "a":
+        ID = input("Enter database name: ") 
+        key = input("Enter the key: ")
+        e.decrypt(key, ID)
         data()
         main()
     elif com == "q":

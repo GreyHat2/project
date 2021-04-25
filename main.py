@@ -1,5 +1,5 @@
 import DB as d
-import encrypt1 as e
+import encrypt as e
 
 
 
@@ -33,11 +33,13 @@ def main():
         main()
     elif com == "l":
         e.encrypt("data.db")
-    
+        main()
+
     elif com == "o":
-        ID = input("Enter database name: ") 
+        ID = input("Enter database name: ")
         key = input("Enter the key: ")
         e.decrypt(key, ID)
+        main()
 
     elif com == "c":
         d.createdb()
@@ -48,7 +50,7 @@ def main():
         main()
     elif com == "s": 
         d.fetchall()
-        main() 
+        main()
     elif com == "a":
         data()
         main()

@@ -32,7 +32,7 @@ def fetchall():
     print("ID" +"\tUsername" +"\tPassword" +"\tName")
     print("--" +"\t--------" +"\t--------"+"\t----")
     for i in info:
-        print (str(i[0]) +"\t\t" + i[1]+"\t\t" + i[2]+"\t\t" + i[3])
+        print (str(i[0]) +"\t" + i[1]+"\t\t" + i[2]+"\t\t" + i[3])
 
     # Commit our command
     conn.commit()
@@ -49,4 +49,5 @@ def delete(id):
 
 def closedb():
     # Close our connection
+    conn = sqlite3.connect('data.db')
     conn.close()

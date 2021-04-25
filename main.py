@@ -2,13 +2,19 @@ import DB as d
 import encrypt as e
 
 
-
 def data():
     # d.createdb()
     name = input("Enter a name: ")
     username = input("Enter a username: ")
     password = input("Enter a password: ")
     d.insertdb(name, username, password)
+
+def handle():
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("##Q to quit.##")
+        handle()
 
 def create():
     d.createdb()
@@ -25,35 +31,48 @@ def main():
     >Create a database(c)
     >Delete a row(d)
     >Lock database(l)
-    >Unlock database(o)
+    >Unlock database(u)
     >Show data(s)
     >Add data(a)
     >Quit(q)
         """)
         main()
     elif com == "l":
-        e.encrypt("data.db")
+        ID = input("Enter database name: ")
+        e.encrypt(ID)
         main()
 
-    elif com == "o":
+    elif com == "u":
         ID = input("Enter database name: ")
         key = input("Enter the key: ")
         e.decrypt(key, ID)
         main()
 
     elif com == "c":
-        d.createdb()
+        try:
+            d.createdb()
+            main()
+        except:
+            print("Database already exists")
         main()
+
     elif com == "d":
         id = input("Enter ID: ")
         d.delete(id)
         main()
-    elif com == "s": 
-        d.fetchall()
+
+    elif com == "s":
+        try:
+            d.fetchall()
+            main()
+        except:
+            print("Unlock the database.")
         main()
+
     elif com == "a":
         data()
         main()
+
     elif com == "q":
         quit()
     else:
@@ -61,4 +80,4 @@ def main():
         main()
 
 if __name__ == '__main__':
-    main()
+    handle()
